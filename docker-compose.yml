@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  skdf-excel-server-go:
+    image: registry.geogracom.com/skdf/skdf-excel-server-go:latest
+    container_name: skdf-excel-server-go
+    depends_on:
+      - skdf-excel-parser
+    ports:
+      - "3001:3001"
+
+  skdf-excel-parser:
+    image: registry.geogracom.com/skdf/skdf-excel-parser:0.1
+    container_name: skdf-excel-parser
+    ports:
+      - "7000:8080"
+    environment:
+      - PG_ENDPOINT=http://10.10.10.45:3000
